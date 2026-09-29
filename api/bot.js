@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const BOT_TOKEN = "8639106730:AAGZkitC9Qz8ffQxLPAuB8_MLdwxVDkTxv8";
     const API_BASE = "https://apinebula.ai/v1";
     const API_KEY = "sk-uQIYMcrAueaSvlRFBL5kzOhA7UEl2xtTipvnnQr61lni7NzI";
-    const MODEL_NAME = "Grok 4.3"; 
+    const MODEL_NAME = "grok-4.6"; 
 
     // 1. 调用 Grok API
     const aiResponse = await fetch(`${API_BASE}/chat/completions`, {
