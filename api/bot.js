@@ -12,11 +12,15 @@ export default async function handler(req, res) {
     const chatId = update.message.chat.id;
     const userText = update.message.text;
 
-    // 硬编码配置
-    const BOT_TOKEN = "8639106730:AAGZkitC9Qz8ffQxLPAuB8_MLdwxVDkTxv8";
-    const API_BASE = "https://apinebula.ai/v1";
-    const API_KEY = "sk-uQIYMcrAueaSvlRFBL5kzOhA7UEl2xtTipvnnQr61lni7NzI";
-    const MODEL_NAME = "grok-4.6"; 
+    // 从 Vercel 环境变量中读取配置
+    const BOT_TOKEN = process.env.BOT_TOKEN;
+    const API_BASE = process.env.API_BASE || "https://apinebula.ai/v1";
+    const API_KEY = process.env.API_KEY;
+    const MODEL_NAME = process.env.MODEL_NAME || "grok-4.6"; 
+
+    if (!BOT_TOKEN || !API_KEY) {
+      return res.status(500).json({ error: 'BOT_TOKEN or API_KEY is not configured in Vercel Environment Variables.' });
+    }
 
     // 1. 调用 Grok API
     const aiResponse = await fetch(`${API_BASE}/chat/completions`, {
